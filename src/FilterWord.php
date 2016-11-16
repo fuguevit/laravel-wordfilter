@@ -22,18 +22,6 @@ class FilterWord extends Model
     ];
 
     /**
-     * Find entity by name field.
-     *
-     * @param Builder $query
-     * @param $name
-     * @return mixed
-     */
-    public function scopeName(Builder $query, $name)
-    {
-        return $query->whereName($name);
-    }
-
-    /**
      * Find entity by range field.
      *
      * @param Builder $query
