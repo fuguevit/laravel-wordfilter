@@ -56,7 +56,7 @@ trait FilterableTrait
     {
         $words = Cache::remember(config('fugue.filterword.cached_key'), config('fugue.filterword.cached_minutes'),
             function () {
-                return $this->createFilterWordModel()->scopeStatus('enable')->get('name');
+                return $this->createFilterWordModel()->scopeStatus('enable')->get('name')->toArray();
             }
         );
         return $words;
