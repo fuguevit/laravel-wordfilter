@@ -15,14 +15,16 @@ trait FilterableTrait
      */
     public function filterFields($fields, $callback)
     {
+        $input = '';
         foreach ($fields as $field) {
-            $value = $this->{$field};
-            if (!$this->censorString($value)) {
-                if ($callback) {
-                    return $this->{$callback}();
-                }
-                return false;
+            $input .= $this->$field;
+        }
+
+        if (!$this->censorString($input)) {
+            if ($callback) {
+                return $this->{$callback}();
             }
+            return false;
         }
         return true;
     }
