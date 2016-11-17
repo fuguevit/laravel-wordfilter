@@ -9,13 +9,14 @@ trait FilterableTrait
     /**
      * Filter fields.
      *
-     * @param $fields
      * @param callable|null $callback
      * @return bool
      */
-    public function filterFields($fields, callable $callback = null)
+    public function filterFields(callable $callback = null)
     {
         $input = '';
+        $fields = $this->getFilterable();
+
         foreach ($fields as $field) {
             $input .= $this->{$field};
         }
