@@ -12,11 +12,11 @@ class WordFilterServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            realpath(__DIR__ . '/../../database/migrations/') => database_path('migrations'),
+            realpath(__DIR__.'/../../database/migrations/') => database_path('migrations'),
         ], 'migrations');
 
         $this->publishes([
-            realpath(__DIR__ . '/../../config/word.filter.php') => config_path('word.filter.php'),
+            realpath(__DIR__.'/../../config/word.filter.php') => config_path('word.filter.php'),
         ], 'config');
     }
 
@@ -25,6 +25,6 @@ class WordFilterServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(realpath(__DIR__ . '/../../config/word.filter.php'), 'word.filter');
+        $this->mergeConfigFrom(realpath(__DIR__.'/../../config/word.filter.php'), 'word.filter');
     }
 }

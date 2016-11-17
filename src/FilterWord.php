@@ -23,7 +23,7 @@ class FilterWord extends Model
     protected $fillable = [
         'name',
         'range',
-        'status'
+        'status',
     ];
 
     /**
@@ -31,6 +31,7 @@ class FilterWord extends Model
      *
      * @param Builder $query
      * @param $range
+     *
      * @return mixed
      */
     public function scopeRange(Builder $query, $range)
@@ -43,6 +44,7 @@ class FilterWord extends Model
      *
      * @param Builder $query
      * @param $status
+     *
      * @return mixed
      */
     public function scopeStatus(Builder $query, $status)

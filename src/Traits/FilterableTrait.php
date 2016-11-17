@@ -24,13 +24,14 @@ trait FilterableTrait
 
         foreach ($fields as $field) {
             // add prefix & suffix symbol for avoiding splice collision.
-            $input .= "##" . $this->{$field} . '##';
+            $input .= '##'.$this->{$field}.'##';
         }
 
         if (!$this->censorContent($input)) {
             if ($callback) {
                 return $callback($this);
             }
+
             return false;
         }
 
@@ -41,6 +42,7 @@ trait FilterableTrait
      * Censor content.
      *
      * @param $content
+     *
      * @return bool
      */
     protected function censorContent($content)
@@ -67,13 +69,15 @@ trait FilterableTrait
         $words = Cache::remember(config('word.filter.cached_key'), config('word.filter.cached_minutes'),
             function () {
                 $collection = $this->createFilterWordModel()->whereStatus('enable')->get(['name']);
-                $array = array();
+                $array = [];
                 foreach ($collection as $item) {
                     $array[] = strtolower($item['name']);
                 }
+
                 return $array;
             }
         );
+
         return $words;
     }
 
@@ -85,7 +89,7 @@ trait FilterableTrait
     public static function createFilterWordModel()
     {
         $filterWordModel = config('word.filter.model');
+
         return new $filterWordModel();
     }
-
 }

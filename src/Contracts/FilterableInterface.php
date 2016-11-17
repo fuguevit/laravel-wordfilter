@@ -15,8 +15,8 @@ interface FilterableInterface
      * Filter eloquent fields.
      *
      * @param callable|null $callback
+     *
      * @return mixed
      */
     public function filterFields(callable $callback = null);
-
 }
