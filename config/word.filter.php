@@ -10,7 +10,7 @@ return [
     | Default filterword model.
     |
     */
-    'model'             =>   \Fuguevit\WordFilter\FilterWord::class,
+    'model'             => \Fuguevit\WordFilter\FilterWord::class,
 
     /*
     |----------------------------------------------------------------------
@@ -20,7 +20,7 @@ return [
     | Default cached key.
     |
     */
-    'cached_key'        =>   'fugue_bad_words',
+    'cached_key'        => 'fugue_bad_words',
 
     /*
     |----------------------------------------------------------------------
@@ -30,5 +30,5 @@ return [
     | Default cached minutes.
     |
     */
-    'cached_minutes'    =>  7*24*60,
+    'cached_minutes'    => 7 * 24 * 60,
 ];
