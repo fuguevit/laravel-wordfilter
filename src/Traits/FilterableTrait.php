@@ -23,7 +23,8 @@ trait FilterableTrait
         $fields = $this->getFilterable();
 
         foreach ($fields as $field) {
-            $input .= $this->{$field};
+            // add prefix & suffix symbol for avoiding splice collision.
+            $input .= "##" . $this->{$field} . '##';
         }
 
         if (!$this->censorContent($input)) {
