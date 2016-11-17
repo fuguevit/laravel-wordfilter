@@ -7,43 +7,46 @@ use Illuminate\Support\Facades\Cache;
 trait FilterableTrait
 {
     /**
-     * Filter Fields
+     * Filter fields.
      *
      * @param $fields
-     * @param $callback
+     * @param callable|null $callback
      * @return bool
      */
-    public function filterFields($fields, $callback)
+    public function filterFields($fields, callable $callback = null)
     {
         $input = '';
         foreach ($fields as $field) {
-            $input .= $this->$field;
+            $input .= $this->{$field};
         }
 
-        if (!$this->censorString($input)) {
+        if (!$this->censorContent($input)) {
             if ($callback) {
-                return $this->{$callback}();
+                return $callback($this);
             }
             return false;
         }
+
         return true;
     }
 
     /**
-     * censorString
+     * Censor content.
      *
-     * @param $string
+     * @param $content
      * @return bool
      */
-    protected function censorString($string)
+    protected function censorContent($content)
     {
-        $arr_badwords = $this->getCachedBadwords();
+        $arrBadWords = $this->getCachedBadwords();
+        $content = strtolower($content);
 
-        // if string contains bad words, return true
-        if (str_contains($string, $arr_badwords)) {
+        // if content contains bad words, return false.
+        if (str_contains($content, $arrBadWords)) {
             return false;
         }
 
+        // return true when content doesn't contain any bad word.
         return true;
     }
 
@@ -54,20 +57,27 @@ trait FilterableTrait
      */
     protected function getCachedBadwords()
     {
-        $words = Cache::remember(config('fugue.filterword.cached_key'), config('fugue.filterword.cached_minutes'),
+        $words = Cache::remember(config('word.filter.cached_key'), config('word.filter.cached_minutes'),
             function () {
-                return $this->createFilterWordModel()->scopeStatus('enable')->get('name')->toArray();
+                $collection = $this->createFilterWordModel()->scopeStatus('enable')->get('name');
+                $array = array();
+                foreach ($collection as $item) {
+                    $array[] = strtolower($item['name']);
+                }
+                return $array;
             }
         );
         return $words;
     }
 
     /**
+     * Create Entity Model.
+     *
      * @return mixed
      */
     public static function createFilterWordModel()
     {
-        $filterWordModel = config('fugue.filterword.model');
+        $filterWordModel = config('word.filter.model');
         return new $filterWordModel();
     }
 
