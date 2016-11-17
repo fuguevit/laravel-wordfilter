@@ -13,6 +13,11 @@ class FilterWord extends Model
     protected $table = 'filter_words';
 
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * {@inheritdoc}
      */
     protected $fillable = [
