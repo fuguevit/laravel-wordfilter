@@ -65,7 +65,7 @@ trait FilterableTrait
     {
         $words = Cache::remember(config('word.filter.cached_key'), config('word.filter.cached_minutes'),
             function () {
-                $collection = $this->createFilterWordModel()->scopeStatus('enable')->get('name');
+                $collection = $this->createFilterWordModel()->whereStatus('enable')->get('name');
                 $array = array();
                 foreach ($collection as $item) {
                     $array[] = strtolower($item['name']);
