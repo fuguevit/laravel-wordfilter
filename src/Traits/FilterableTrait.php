@@ -7,10 +7,15 @@ use Illuminate\Support\Facades\Cache;
 trait FilterableTrait
 {
     /**
-     * Filter fields.
-     *
-     * @param callable|null $callback
-     * @return bool
+     * {@inheritdoc}
+     */
+    public function getFilterable()
+    {
+        return $this->filterable;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function filterFields(callable $callback = null)
     {

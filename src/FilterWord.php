@@ -17,7 +17,7 @@ class FilterWord extends Model
      */
     protected $fillable = [
         'name',
-        'scope',
+        'range',
         'status'
     ];
 
