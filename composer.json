@@ -1,5 +1,5 @@
 {
-  "name": "fuguevit/wordfilter",
+  "name": "fuguevit/laravel-wordfilter",
   "description": "Implement word filter for eloquent fields in Laravel",
   "keywords": ["php", "laravel", "filter", "wordfilter", "censor", "eloquent"],
   "license": "MIT",
