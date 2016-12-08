@@ -29,7 +29,7 @@ trait FilterableTrait
 
         if (!$this->censorContent($input)) {
             if ($callback) {
-                return $callback($this);
+                return $callback();
             }
 
             return false;
