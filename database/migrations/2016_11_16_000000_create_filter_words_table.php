@@ -22,7 +22,6 @@ class CreateFilterWordsTable extends Migration
         });
     }
 
-
     public function down()
     {
         Schema::drop('filter_words');
